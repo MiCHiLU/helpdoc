@@ -30,4 +30,20 @@ Django オンラインドキュメント和訳 : SITE TITLE
 >>> title("<div><h2>none-title<h2></div>", site_title)
 'Not Found Title Line. : SITE TITLE'
 
+>>> from utils.doctests import reset, loaddata, Test
+>>> loaddata("helpdoc/fixtures/auth.json")
+>>> url = "/helpdoc/"
+>>> urls = {"/helpdoc/": ("200","")}
+>>> t = Test()
+>>> response = t.c.get(url)
+Traceback (most recent call last):
+...
+TypeError: 'str' object is not callable
+>>> t = Test()
+>>> t.c.login(username="test", password="secret")
+True
+>>> response = t.c.get(url)
+>>> response.status_code
+200
+
 """
