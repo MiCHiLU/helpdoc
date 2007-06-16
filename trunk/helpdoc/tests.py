@@ -36,10 +36,10 @@ Django オンラインドキュメント和訳 : SITE TITLE
 >>> urls = {"/helpdoc/": ("200","")}
 >>> t = Test()
 >>> response = t.c.get(url)
-Traceback (most recent call last):
-...
-TypeError: 'str' object is not callable
->>> t = Test()
+>>> response.status_code
+302
+>>> response.headers["Location"]
+'/accounts/login/?next=/helpdoc/'
 >>> t.c.login(username="test", password="secret")
 True
 >>> response = t.c.get(url)
