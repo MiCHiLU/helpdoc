@@ -30,7 +30,8 @@ def markup_dispatch(file_path, markup=None, **argv):
     else:
         return None
 
-def render(request, doc, **argv):
+def render(request, doc, template_name=None, **argv):
+    template_name = template_name or "helpdoc/base_site.html"
     file_path = settings.CUSTOM_DOC_JA_FILE % doc
     content = get_source_file(file_path)
     if not content:
@@ -38,8 +39,7 @@ def render(request, doc, **argv):
     markup = markup_dispatch(file_path, **argv)
     if callable(markup):
         content = markup(content)
-    return  direct_to_template(request, "helpdoc/base_site.html", {"content":content, })
-    return  direct_to_template(request, "doc/base.html", {"content":content, })
+    return  direct_to_template(request, template_name, {"content":content, })
 
 def app_labels(request):
     return  direct_to_template(request, "helpdoc/index.html")
