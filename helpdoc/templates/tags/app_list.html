@@ -1,0 +1,11 @@
+{% if app_list %}
+  <ul>
+{% endif %}
+{% for app in app_list %}
+  <li>
+    <a href="/helpdoc/{{ app }}/">{{ app }}</a>
+  </li>
+{% endfor %}
+{% if app_list %}
+  </ul>
+{% endif %}
