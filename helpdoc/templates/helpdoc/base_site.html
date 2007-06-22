@@ -13,4 +13,4 @@
 
 {% block breadcrumbs %}<div class="breadcrumbs"><a href="/helpdoc/">{% trans 'Home' %}</a>{% if title %} &rsaquo; {{ title|escape }}{% endif %}</div>{% endblock %}
 
-{% block userlinks %}<a href="doc/">{% trans 'Documentation' %}</a> / <a href="/helpdoc/password_change/">{% trans 'Change password' %}</a> / <a href="/helpdoc/logout/">{% trans 'Log out' %}</a>{% endblock %}
+{% block userlinks %}<a href="{% load helpdoc_extras %}{% admin_base_url %}doc/">{% trans 'Documentation' %}</a> / <a href="{% load helpdoc_extras %}{% admin_base_url %}password_change/">{% trans 'Change password' %}</a> / <a href="{% load helpdoc_extras %}{% admin_base_url %}logout/">{% trans 'Log out' %}</a>{% endblock %}

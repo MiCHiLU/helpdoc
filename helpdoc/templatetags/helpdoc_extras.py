@@ -3,6 +3,7 @@ from BeautifulSoup import BeautifulSoup
 from django.db.models import get_apps
 import os.path
 
+from django.core.urlresolvers import reverse
 
 register = template.Library()
 
@@ -36,3 +37,7 @@ register.inclusion_tag("tags/app_menu.html")(app_menu)
 def app_list():
     return dict(app_list=get_app_list())
 register.inclusion_tag("tags/app_list.html")(app_list)
+
+def admin_base_url():
+    return reverse('django.contrib.admin.views.main.index')
+register.simple_tag(admin_base_url)
