@@ -38,11 +38,15 @@ Django オンラインドキュメント和訳 : SITE TITLE
 >>> response.status_code
 302
 >>> response.headers["Location"]
-'/accounts/login/?next=/helpdoc/'
+'/helpdoc/accounts/login/?next=/helpdoc/'
 >>> t.c.login(username="test", password="secret")
 True
 >>> response = t.c.get(url)
 >>> response.status_code
 200
+
+>>> from templatetags.helpdoc_extras import app_list
+>>> app_list()
+{'app_list': {'doc': '/Users/Shared/site/DJ/michilu/doc'}}
 
 """
