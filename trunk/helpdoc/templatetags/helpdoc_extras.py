@@ -1,22 +1,41 @@
 from django import template
-from BeautifulSoup import BeautifulSoup
 from django.db.models import get_apps
-import os.path
-
 from django.core.urlresolvers import reverse
+import os.path
+import re
 
 register = template.Library()
 
 def title(content, site_title=None):
-    title = BeautifulSoup(content).find("h1")
+    """
+    #title = re.match('(<.*?>)*(?P<title>[^<]+).*', content).group("title")
+    (?<|>)[^<]+
+    (<.*?>)*(?P<title>[^<]+).*
+    (<[^>]>)
+    <P/>
+    (?>=>).*(?=</)
+    """
+    title = None
+    try:
+        from BeautifulSoup import BeautifulSoup
+        title = BeautifulSoup(content).find("h1")
+        if title:
+            while True:
+                try:
+                    title = title.contents[0]
+                except (KeyError, AttributeError):
+                    break
+    except ImportError:
+        try:
+            from lxml import etree
+            parser = etree.HTMLParser()
+            title = etree.fromstring(content, parser).xpath("//h1/a")[0].text
+        except ImportError:
+            pass
+    
     if title:
-        while True:
-            try:
-                title = title.contents[0]
-            except (KeyError, AttributeError):
-                break
         title = title.encode("UTF-8")
-    if not title:
+    else:
         title = "Not Found Title Line."
     if site_title and (not title == site_title):
         title += " : %s" % site_title
