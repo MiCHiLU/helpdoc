@@ -1,7 +1,7 @@
 {% extends "admin/base.html" %}
 {% load i18n %}
 
-{% block title %}{% load helpdoc_extras %}{% title content %} | {% trans 'helpdoc' %}{% endblock %}
+{% block title %}{% load helpdoc_extras %}{% if content %}{% title content %} | {% endif %}{% trans 'helpdoc' %}{% endblock %}
 
 {% block branding %}
 <h1 id="site-name">{% trans 'Django administration' %}</h1>
