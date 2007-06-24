@@ -2,19 +2,10 @@ from django import template
 from django.db.models import get_apps
 from django.core.urlresolvers import reverse
 import os.path
-import re
 
 register = template.Library()
 
 def title(content, site_title=None):
-    """
-    #title = re.match('(<.*?>)*(?P<title>[^<]+).*', content).group("title")
-    (?<|>)[^<]+
-    (<.*?>)*(?P<title>[^<]+).*
-    (<[^>]>)
-    <P/>
-    (?>=>).*(?=</)
-    """
     title = None
     try:
         from BeautifulSoup import BeautifulSoup
