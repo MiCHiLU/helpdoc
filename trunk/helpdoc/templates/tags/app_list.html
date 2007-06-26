@@ -1,3 +1,4 @@
+{% load helpdoc_extras %}
 {% if app_list %}
   <ul>
 {% else %}
@@ -5,7 +6,7 @@
 {% endif %}
 {% for app in app_list %}
   <li>
-    <a href="/helpdoc/{{ app }}/">{{ app }}</a>
+    <a href="{{ helpdoc_base_url }}{{ app }}/">{{ app }}</a>
   </li>
 {% endfor %}
 {% if app_list %}

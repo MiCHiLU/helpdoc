@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.views.generic.simple import direct_to_template
 from django.contrib.markup.templatetags.markup import textile, markdown, restructuredtext
+from django.contrib.auth.decorators import permission_required
 import os.path
 
 def get_source_file(file_path):
@@ -41,3 +42,7 @@ def render(request, doc, app=None, file_path_pattern=None, template_name=None, *
     if callable(markup):
         content = markup(content)
     return  direct_to_template(request, template_name, {"content":content, })
+
+def index(request):
+    return direct_to_template(request, "helpdoc/index.html")
+index = permission_required("is_staff")(index)
