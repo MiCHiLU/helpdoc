@@ -40,6 +40,3 @@ def render(request, doc, template_name=None, **argv):
     if callable(markup):
         content = markup(content)
     return  direct_to_template(request, template_name, {"content":content, })
-
-def app_labels(request):
-    return  direct_to_template(request, "helpdoc/index.html")
