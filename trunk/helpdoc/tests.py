@@ -38,7 +38,7 @@ Django オンラインドキュメント和訳 : SITE TITLE
 >>> response.status_code
 302
 >>> response.headers["Location"]
-'/helpdoc/accounts/login/?next=/helpdoc/'
+'/accounts/login/?next=/helpdoc/'
 >>> t.c.login(username="test", password="secret")
 True
 >>> response = t.c.get(url)
