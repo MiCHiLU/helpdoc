@@ -1,6 +1,7 @@
 from django import template
 from django.db.models import get_apps
 from django.core.urlresolvers import reverse
+from helpdoc.views import index
 import os.path
 
 register = template.Library()
@@ -32,6 +33,9 @@ def title(content, site_title=None):
         title += " : %s" % site_title
     return title
 register.simple_tag(title)
+
+def helpdoc_base_url():
+    return reverse(index)
 
 def get_app_list():
     app_list = {}
