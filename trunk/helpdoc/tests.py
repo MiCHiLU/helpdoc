@@ -46,7 +46,7 @@ True
 200
 
 >>> from templatetags.helpdoc_extras import app_list
->>> app_list()
-{'app_list': {'doc': '/Users/Shared/site/DJ/michilu/doc'}}
+>>> str(app_list())[:14]
+"{'app_list': {"
 
 """

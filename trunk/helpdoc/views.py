@@ -1,6 +1,5 @@
 from django.http import Http404
 from django.views.generic.simple import direct_to_template
-from django.conf import settings
 from django.contrib.markup.templatetags.markup import textile, markdown, restructuredtext
 import os.path
 
@@ -30,9 +29,11 @@ def markup_dispatch(file_path, markup=None, **argv):
     else:
         return None
 
-def render(request, doc, template_name=None, **argv):
+def render(request, doc, app=None, file_path_pattern=None, template_name=None, **argv):
+    app = app or ""
     template_name = template_name or "helpdoc/base_site.html"
-    file_path = settings.CUSTOM_DOC_JA_FILE % doc
+
+    file_path = (file_path_pattern or "%s/docs/%s.txt") % (app, doc)
     content = get_source_file(file_path)
     if not content:
         raise Http404
