@@ -14,10 +14,6 @@ urlpatterns = patterns('',)
 urlpatterns += patterns('',
     (r'^accounts/login/$', 'django.contrib.auth.views.login', {"template_name":"admin/login.html"}),
 
-    (r'^logout/', redirect_to, {'url' : "/admin/logout/"}),
-    (r'^password_change/', redirect_to, {'url' : "/admin/password_change/"}),
-    (r'^password_change/done/', redirect_to, {'url' : "/admin/password_change/done/"}),
-
     (r'^$', app_labels),
     (r'^(?P<app>\w+)/(?P<doc>[0-9a-z-_\.]+)/$', render),
     (r'^(?P<app>\w+)/', redirect_to, {'url' : "index/"}),
