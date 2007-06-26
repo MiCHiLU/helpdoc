@@ -8,6 +8,13 @@
 <h1 id="site-name">{% trans 'Django administration' %}</h1>
 {% endblock %}
 
-{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% admin_base_url %}">{% trans 'Home' %}</a>{% app_menu %}</div>{% endblock %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% admin_base_url %}">{% trans 'Home' %}</a>
+  &rsaquo;
+  <a href="/helpdoc/">HelpDoc</a>
+  {% app_menu %}
+</div>
+{% endblock %}
 
 {% block userlinks %}<a href="{% admin_base_url %}doc/">{% trans 'Documentation' %}</a> / <a href="{% admin_base_url %}password_change/">{% trans 'Change password' %}</a> / <a href="{% admin_base_url %}logout/">{% trans 'Log out' %}</a>{% endblock %}
