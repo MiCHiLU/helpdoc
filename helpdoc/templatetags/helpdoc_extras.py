@@ -34,9 +34,9 @@ def title(content, site_title=None):
     return title
 register.simple_tag(title)
 
-#def helpdoc_base_url():
+#def base_url():
 #    return reverse(index)
-#register.simple_tag(helpdoc_base_url)
+#register.simple_tag(base_url)
 
 def get_app_lists():
     app_list = {}
