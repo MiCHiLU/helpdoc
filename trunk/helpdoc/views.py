@@ -30,7 +30,7 @@ def markup_dispatch(file_path, markup=None, **argv):
     else:
         return None
 
-def render(request, doc, app=None, file_path_pattern=None, helpdoc_base_url=None,
+def render(request, doc, app=None, file_path_pattern=None, base_url=None,
             template_name=None, **argv):
     app = app or ""
     template_name = template_name or "helpdoc/base_site.html"
@@ -44,12 +44,12 @@ def render(request, doc, app=None, file_path_pattern=None, helpdoc_base_url=None
         content = markup(content)
     return  direct_to_template(request, template_name, dict(
         content = content,
-        helpdoc_base_url = helpdoc_base_url,
+        base_url = base_url,
     ))
 
-def index(request, helpdoc_base_url=None):
+def index(request, base_url=None):
     extra_context = {}
-    if helpdoc_base_url:
-        extra_context.update(dict(helpdoc_base_url=helpdoc_base_url))
+    if base_url:
+        extra_context.update(dict(base_url=base_url))
     return direct_to_template(request, "helpdoc/index.html", extra_context=extra_context)
 index = permission_required("is_staff")(index)
