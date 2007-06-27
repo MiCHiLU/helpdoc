@@ -38,22 +38,30 @@ register.simple_tag(title)
 #    return reverse(index)
 #register.simple_tag(helpdoc_base_url)
 
-def get_app_list():
+def get_app_lists():
     app_list = {}
     for app in get_apps():
         if os.path.exists(os.path.join(os.path.dirname(app.__file__), 'docs')):
             app_list[app.__name__.split(".")[-2]] = os.path.dirname(app.__file__)
     return app_list
 
-def app_menu(context):
-    context.update(dict(app_list=get_app_list()))
+def app_lists(context):
+    context.update(dict(app_list=get_app_lists()))
     return context
+
+def app_menu(context):
+    return app_lists(context)
 register.inclusion_tag("tags/app_menu.html", takes_context=True)(app_menu)
 
 def app_list(context):
-    context.update(dict(app_list=get_app_list()))
-    return context
+    return app_lists(context)
 register.inclusion_tag("tags/app_list.html", takes_context=True)(app_list)
+
+#helpdoc_menu = app_lists
+#register.inclusion_tag("tags/app_menu.html", takes_context=True)(helpdoc_menu)
+#
+#helpdoc_list = app_lists
+#register.inclusion_tag("tags/app_list.html", takes_context=True)(helpdoc_list)
 
 def admin_base_url():
     return reverse('django.contrib.admin.views.main.index')
