@@ -34,8 +34,9 @@ def title(content, site_title=None):
     return title
 register.simple_tag(title)
 
-def helpdoc_base_url():
-    return reverse(index)
+#def helpdoc_base_url():
+#    return reverse(index)
+#register.simple_tag(helpdoc_base_url)
 
 def get_app_list():
     app_list = {}
@@ -44,13 +45,15 @@ def get_app_list():
             app_list[app.__name__.split(".")[-2]] = os.path.dirname(app.__file__)
     return app_list
 
-def app_menu():
-    return dict(app_list=get_app_list())
-register.inclusion_tag("tags/app_menu.html")(app_menu)
+def app_menu(context):
+    context.update(dict(app_list=get_app_list()))
+    return context
+register.inclusion_tag("tags/app_menu.html", takes_context=True)(app_menu)
 
-def app_list():
-    return dict(app_list=get_app_list())
-register.inclusion_tag("tags/app_list.html")(app_list)
+def app_list(context):
+    context.update(dict(app_list=get_app_list()))
+    return context
+register.inclusion_tag("tags/app_list.html", takes_context=True)(app_list)
 
 def admin_base_url():
     return reverse('django.contrib.admin.views.main.index')

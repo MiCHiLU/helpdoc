@@ -45,8 +45,4 @@ True
 >>> response.status_code
 200
 
->>> from templatetags.helpdoc_extras import app_list
->>> str(app_list())[:14]
-"{'app_list': {"
-
 """
