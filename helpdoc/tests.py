@@ -45,4 +45,8 @@ True
 >>> response.status_code
 200
 
+>>> import context_processors
+>>> context_processors.helpdoc(None)
+{'helpdoc_base_url': '/helpdoc/'}
+
 """
