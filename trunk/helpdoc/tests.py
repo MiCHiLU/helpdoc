@@ -30,18 +30,19 @@ Django オンラインドキュメント和訳 : SITE TITLE
 >>> title("<div><h2>none-title<h2></div>", site_title)
 'Not Found Title Line. : SITE TITLE'
 
->>> from utils.doctests import loaddata, Test
->>> loaddata("helpdoc/fixtures/auth.json")
+>>> from django.core import management
+>>> from django.test.client import Client
+>>> management.load_data(["helpdoc/fixtures/auth.json"], verbosity=0)
 >>> url = "/helpdoc/"
->>> t = Test()
->>> response = t.c.get(url)
+>>> c = Client()
+>>> response = c.get(url)
 >>> response.status_code
 302
 >>> response.headers["Location"]
 '/accounts/login/?next=/helpdoc/'
->>> t.c.login(username="test", password="secret")
+>>> c.login(username="test", password="secret")
 True
->>> response = t.c.get(url)
+>>> response = c.get(url)
 >>> response.status_code
 200
 
