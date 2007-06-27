@@ -51,11 +51,11 @@ def app_lists(context):
 
 def helpdoc_menu(context):
     return app_lists(context)
-register.inclusion_tag("tags/helpdoc_menu.html", takes_context=True)(helpdoc_menu)
+register.inclusion_tag("helpdoc/tags/helpdoc_menu.html", takes_context=True)(helpdoc_menu)
 
 def helpdoc_list(context):
     return app_lists(context)
-register.inclusion_tag("tags/helpdoc_list.html", takes_context=True)(helpdoc_list)
+register.inclusion_tag("helpdoc/tags/helpdoc_list.html", takes_context=True)(helpdoc_list)
 
 def admin_base_url():
     return reverse('django.contrib.admin.views.main.index')
