@@ -16,12 +16,12 @@ def markup_dispatch(file_path, markup=None, **argv):
         extension = os.path.basename(file_path).split(".")[-1]
     except IndexError:
         extension = None
-    markup_dict = {
-        "textile": textile,
-        "markdown": markdown,
-        "rst": restructuredtext,
-        "html": None,
-    }
+    markup_dict = dict(
+        textile = textile,
+        markdown = markdown,
+        rst = restructuredtext,
+        html = None,
+    )
     markup = markup or "rst"
     if extension in markup_dict.keys():
         return markup_dict[extension]
