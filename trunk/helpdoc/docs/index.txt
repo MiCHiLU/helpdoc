@@ -1,0 +1,133 @@
+HelpDoc Documentation
+=====================
+
+Download
+--------
+
+ダウンロードサイト
+
+::
+
+  $ svn co
+  $ mv helpdoc myproject/helpdoc
+
+Install
+-------
+
+設定ファイル
+~~~~~~~~~~~~
+
+``settings.INSTALLED_APPS`` に **helpdoc** を追加します。
+
+**settings.py**
+
+::
+
+  INSTALLED_APPS = (
+      ...
+      'myproject.helpdoc',
+  )
+
+URL設定
+~~~~~~~
+
+``/helpdoc/`` へのアクセスを **myproject.helpdoc.urls** へ割り当てます。
+
+**urls.py**
+
+::
+
+  urlpatterns = patterns('',
+      ...
+      (r'^helpdoc/', include('myproject.helpdoc.urls')),
+  )
+
+必要に応じて、ログインが必要になった場合にアクセスするための **ログイン画面** URLを設定します。
+
+**urls.py**
+
+::
+
+  urlpatterns = patterns('',
+      ...
+      (r'^accounts/login/$', 'django.contrib.auth.views.login', dict(
+          template_name = "admin/login.html",
+      )),
+  )
+
+
+Tuor
+----
+
+|documentation|
+|helpdoc|
+|helpdoc-menu|
+
+.. |documentation| image:: /static/helpdoc/images/01documentation.png
+.. |helpdoc| image:: /static/helpdoc/images/02helpdoc.png
+.. |helpdoc-menu| image:: /static/helpdoc/images/03helpdoc-menu.png
+
+::
+
+  $ ls -d1 **/docs
+  blog/docs
+  doc/docs
+  helpdoc/docs
+
+|helpdoc-app-menu|
+|helpdoc-app-list|
+|helpdoc-render|
+|helpdoc-title|
+
+.. |helpdoc-app-menu| image:: /static/helpdoc/images/04helpdoc-app-menu.png
+.. |helpdoc-app-list| image:: /static/helpdoc/images/05helpdoc-app-list.png
+.. |helpdoc-render| image:: /static/helpdoc/images/06helpdoc-render.png
+.. |helpdoc-title| image:: /static/helpdoc/images/07helpdoc-title.png
+
+
+テキストフォーマットを指定する
+------------------------------
+
+ベースURLを変更する
+settings.HELPDOC_BASE_URL
+
+::
+
+  urlpatterns = patterns('',
+      ...
+      (r'^mysite-help/', include('myproject.helpdoc.urls'), dict(
+          base_url = "/mysite-help/",
+      )),
+  )
+
+admin以下にしたい場合
+
+**settings.py**
+
+::
+
+  INSTALLED_APPS = (
+      ...
+      'myproject.helpdoc',
+      'django.contrib.admin',
+  )
+
+**urls.py**
+
+::
+
+  urlpatterns = patterns('',
+      ...
+      (r'^admin/mysite-help/', include('myproject.helpdoc.urls'), dict(
+          base_url = "/admin/mysite-help/",
+      )),
+  )
+
+views.render
+------------
+
+Sitemap
+-------
+
+静的ファイルの配信
+~~~~~~~~~~~~~~~~~~
