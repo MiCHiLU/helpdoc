@@ -2,6 +2,7 @@ from django.http import Http404
 from django.views.generic.simple import direct_to_template
 from django.contrib.markup.templatetags.markup import textile, markdown, restructuredtext
 from django.contrib.auth.decorators import permission_required
+from django.conf import settings
 import os.path
 import codecs
 
@@ -37,6 +38,11 @@ def markup_dispatch(file_path, markup=None, **argv):
 def render(request, doc, app=None, file_path_pattern=None, base_url=None,
             template_name=None, **argv):
     app = app or ""
+    if not base_url:
+        if hasattr(settings, "HELPDOC_BASE_URL"):
+            base_url = settings.HELPDOC_BASE_URL
+        else:
+            base_url = ""
     template_name = template_name or "helpdoc/base_site.html"
 
     file_path = (file_path_pattern or "%s/docs/%s.txt") % (app, doc)
