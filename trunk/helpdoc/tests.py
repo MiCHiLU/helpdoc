@@ -1,6 +1,26 @@
 # -*- coding: utf-8 -*-
 """
-#markup_dispatch
+# find_source_file
+>>> from views import find_source_file
+>>> find_source_file("helpdoc/tests/index.txt")
+'helpdoc/tests/index.txt'
+>>> find_source_file("helpdoc/tests/index")
+'helpdoc/tests/index.txt'
+>>> find_source_file("helpdoc/tests/rst")
+'helpdoc/tests/rst.rst'
+>>> find_source_file("helpdoc/tests/markdown")
+'helpdoc/tests/markdown.markdown'
+>>> find_source_file("helpdoc/tests/textile")
+'helpdoc/tests/textile.textile'
+>>> find_source_file("helpdoc/tests/html")
+'helpdoc/tests/html.html'
+>>> print find_source_file("helpdoc/tests/none")
+None
+
+# get_source_file
+>>> from views import get_source_file
+
+# markup_dispatch
 >>> from views import markup_dispatch
 >>> markup_dispatch("./helpdoc/tests/index.txt").func_name
 'restructuredtext'
