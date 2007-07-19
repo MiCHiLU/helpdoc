@@ -9,7 +9,7 @@ import codecs
 def find_source_file(file_path):
     if os.path.exists(file_path):
         return file_path
-    file_path = file_path.split(".")[0]
+    file_path = os.path.splitext(file_path)[0]
     for extension in ("txt","rst","markdown","textile","html"):
         _file_path = "%s.%s" % (file_path, extension)
         if os.path.exists(_file_path):
@@ -30,10 +30,7 @@ def get_source_file(file_path, encoding=None, **argv):
     return f.read(), _file_path
 
 def markup_dispatch(file_path, markup=None, **argv):
-    try:
-        extension = os.path.basename(file_path).split(".")[-1]
-    except IndexError:
-        extension = None
+    extension = os.path.splitext(file_path)[1][1:]
     markup_dict = dict(
         textile = textile,
         markdown = markdown,
