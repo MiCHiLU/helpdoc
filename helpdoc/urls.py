@@ -1,9 +1,9 @@
 from django.conf.urls.defaults import *
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import login_required
 from django.views.generic.simple import redirect_to
 from views import index, render
 
-render = permission_required("is_staff")(render)
+render = login_required(render)
 
 urlpatterns = patterns('',)
 
