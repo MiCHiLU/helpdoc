@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.views.generic.simple import direct_to_template
 from django.contrib.markup.templatetags.markup import textile, markdown, restructuredtext
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 import os.path
 import codecs
@@ -72,5 +72,5 @@ def index(request, base_url=None):
     if base_url:
         extra_context.update(dict(base_url=base_url))
     return direct_to_template(request, "helpdoc/index.html", extra_context=extra_context)
-index = permission_required("is_staff")(index)
+index = login_required(index)
 

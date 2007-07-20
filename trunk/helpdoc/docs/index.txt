@@ -165,7 +165,7 @@ HelpDoc のメニューからアクセスしてみましょう。
 - Django 0.96 以降。
 - ``settings.INSTALLED_APPS`` にリストされ、且つ ``<app>/docs`` ディレクトリを持つ app が対象です。
 - 対象の app は Help Documentations にアンカーがリストされます。
-  ``permission_required("is_staff")`` になっています。
+  ``login_required`` になっています。
 
 では、もう少しだけカスタマイズの仕方について説明します。
 
