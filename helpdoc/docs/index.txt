@@ -48,7 +48,7 @@ URL設定
       (r'^helpdoc/', include('myproject.helpdoc.urls')),
   )
 
-必要に応じて、 **ログイン画面** URLを設定します。
+必要に応じて、ログイン画面のURLを設定します。
 
 **urls.py**
 
@@ -193,17 +193,14 @@ urls.py で指定する
 拡張子で指定する
 ~~~~~~~~~~~~~~~~
 
-reStructuredText:
-  filename. **txt**
-  filename. **rst**
-markdown:
-  filename. **markdown**
-Textile:
-  filename. **textile**
-HTML:
-  filename. **html**
+1. reStructuredText : ``filename.`` **txt**
+2. reStructuredText : ``filename.`` **rst**
+3. Markdown : ``filename.`` **markdown**
+4. Textile : ``filename.`` **textile**
+5. HTML : ``filename.`` **html**
 
 拡張子の指定が優先されます。
+また、上に列記した順に拡張子を捜査します。
 何も指定されない場合は reStructuredText として解釈されます。
 
 
