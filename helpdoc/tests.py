@@ -42,13 +42,20 @@ None
 
 >>> from templatetags.helpdoc_extras import title
 >>> from views import get_source_file
+>>> try:
+...     from django.utils import encoding
+...     def test_print(uni): 
+...         print encoding.smart_str(uni)
+... except ImportError:
+...     def test_print(str):
+...         print str
 >>> site_title = "SITE TITLE"
->>> print title('<h1>Django オンラインドキュメント和訳</h1>', site_title)
+>>> test_print(title('<h1>Django オンラインドキュメント和訳</h1>', site_title))
 Django オンラインドキュメント和訳 : SITE TITLE
->>> print title('<div><h1><a id="django" name="django">Django オンラインドキュメント和訳</a></h1><h1><a>sub-title</a></h1></div>', site_title)
+>>> test_print(title('<div><h1><a id="django" name="django">Django オンラインドキュメント和訳</a></h1><h1><a>sub-title</a></h1></div>', site_title))
 Django オンラインドキュメント和訳 : SITE TITLE
->>> title("<div><h2>none-title<h2></div>", site_title)
-'Not Found Title Line. : SITE TITLE'
+>>> test_print(title("<div><h2>none-title<h2></div>", site_title))
+Not Found Title Line. : SITE TITLE
 
 >>> import context_processors
 >>> context = context_processors.helpdoc(None)
@@ -58,7 +65,10 @@ Django オンラインドキュメント和訳 : SITE TITLE
 
 >>> from django.core import management
 >>> from django.test.client import Client
->>> management.load_data(["helpdoc/tests/auth.json"], verbosity=0)
+>>> try:
+...     management.call_command("loaddata", "helpdoc/tests/auth.json", verbosity=0)
+... except AttributeError:
+...     management.load_data(["helpdoc/tests/auth.json"], verbosity=0)
 >>> c = Client()
 >>> response = c.get(url)
 >>> response.status_code
