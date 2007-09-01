@@ -24,3 +24,16 @@ class HelpdocSitemap(object):
             })
             result.append(info_dict)
         return result
+
+
+def get_timestamp(target_dir, extension=None):
+    result = dict()
+    target_files = os.listdir(target_dir)
+    for target_file in target_files:
+        target_path = target_dir + target_file
+        if extension and not target_path.endswith(extension):
+            continue
+        if not os.path.isfile(target_path):
+            continue
+        result[target_file] = datetime.fromtimestamp(os.path.getmtime(target_path))
+    return result

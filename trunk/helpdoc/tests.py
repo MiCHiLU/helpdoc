@@ -79,4 +79,13 @@ Not Found Title Line. : SITE TITLE
 >>> if version: response = c.get(url)
 >>> if version: assert(response.status_code == 200)
 
+>>> from util import get_timestamp
+>>> timestamp_dict = get_timestamp("helpdoc/", extension=".py")
+>>> timestamp_dict.keys()
+['models.py', 'views.py', 'util.py', '__init__.py', 'tests.py', 'context_processors.py', 'urls.py']
+>>> type(timestamp_dict['__init__.py'])
+<type 'datetime.datetime'>
+>>> get_timestamp("./", extension=".not_found")
+{}
+
 """
