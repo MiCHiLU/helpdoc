@@ -1,6 +1,8 @@
 import os.path
 from datetime import datetime
 
+markup_extensions = ("txt","rst","markdown","textile","html")
+
 class HelpdocSitemap(object):
     info_dict = dict(
         changefreq = "weekly",
