@@ -30,6 +30,8 @@ class HelpdocSitemap(object):
 
 def get_timestamp(target, extension=None):
     timestamp = lambda x: datetime.fromtimestamp(os.path.getmtime(x))
+    if not os.path.isdir(target):
+        return timestamp(target)
     result = dict()
     target_files = os.listdir(target)
     for target_file in target_files:

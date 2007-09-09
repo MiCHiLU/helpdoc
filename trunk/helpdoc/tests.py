@@ -87,5 +87,7 @@ Not Found Title Line. : SITE TITLE
 <type 'datetime.datetime'>
 >>> get_timestamp("./", extension=".not_found")
 {}
+>>> type(get_timestamp("helpdoc/__init__.py"))
+<type 'datetime.datetime'>
 
 """
