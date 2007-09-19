@@ -73,8 +73,12 @@ Not Found Title Line. : SITE TITLE
 >>> response = c.get(url)
 >>> response.status_code
 302
->>> assert(response.headers["Location"].split("=")[1] == url)
 >>> version = management.get_version().startswith("0.97")
+>>> if version:
+...     location = response._headers["location"]
+... else:
+...     location = response.headers["Location"]
+>>> assert(location.split("=")[1] == url)
 >>> if version: assert(c.login(username="test", password="secret"))
 >>> if version: response = c.get(url)
 >>> if version: assert(response.status_code == 200)
