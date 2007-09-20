@@ -28,12 +28,15 @@ class HelpdocSitemap(object):
         return result
 
 
-def get_timestamp(target, extension=None, utc=False):
+def get_timestamp(target, extension=None, utc=False, raw=False):
     if utc:
         fromtimestamp = datetime.utcfromtimestamp
     else:
         fromtimestamp = datetime.fromtimestamp
-    timestamp = lambda x: fromtimestamp(os.path.getmtime(x))
+    if raw:
+        timestamp = lambda x: os.path.getmtime(x)
+    else:
+        timestamp = lambda x: fromtimestamp(os.path.getmtime(x))
     if not os.path.isdir(target):
         return timestamp(target)
     result = dict()

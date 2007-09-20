@@ -97,5 +97,9 @@ Not Found Title Line. : SITE TITLE
 >>> utc_false = get_timestamp("helpdoc/__init__.py")
 >>> utc_true == utc_false, type(utc_true - utc_false)
 (False, <type 'datetime.timedelta'>)
+>>> raw = get_timestamp("helpdoc/__init__.py", raw=True)
+>>> raw_utc = get_timestamp("helpdoc/__init__.py", raw=True, utc=True)
+>>> type(raw), type(raw_utc), raw == raw_utc
+(<type 'int'>, <type 'int'>, True)
 
 """
